@@ -64,11 +64,6 @@ There are some endpoints purposefully left out for numerous reasons:
 Complete list of endpoints actually published by BitTorrent team can be seen in ``misc/extracted.txt``
 
 
-## Release History
-
-* 0.1
-    * Work in progress
-
 ## TO-DO
 
 * Port additional endpoints as they're exposed in the [Python version](https://github.com/BTTBoost/BTTSpeed-API).
