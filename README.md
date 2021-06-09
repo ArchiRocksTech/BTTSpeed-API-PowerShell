@@ -63,7 +63,7 @@ Complete list of endpoints actually published by BitTorrent team can be seen in 
 
 ## TO-DO
 
-* Port additional endpoints as they're exposed in the Python version
+* Port additional endpoints as they're exposed in the [Python version](https://github.com/BTTBoost/BTTSpeed-API).
 
 ## Meta
 
