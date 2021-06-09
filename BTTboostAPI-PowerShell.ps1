@@ -3,7 +3,6 @@
 # @ frt.rocks
 # Python Source: https://github.com/BTTBoost/BTTSpeed-API
 # License: WTFPL
-# Version: 0.1 - Modified - 2021-06-09 - Initial Build
 # =======================================================
 
 param (
@@ -116,7 +115,7 @@ Function Refresh-Balance($base, $token, $port){
     $status = $null
     $status = Invoke-WebRequest -Uri $url -ErrorVariable webReq
     If ($status.StatusCode -eq 200 -or $status.StatusCode -eq 202) {
-        Write-Host $($status.StatusCode)
+        # Write-Host $($status.StatusCode)
         # 200 is OK
         # 202 is accepting and processing
         Return
