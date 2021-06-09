@@ -7,21 +7,21 @@ Ported from the [Python source](https://github.com/BTTBoost/BTTSpeed-API). As th
 
 ```
 -=[ Earnings API ]=-
-* Get-Updates               [Get current status]
-* Get-HourlyUpdate          [Hourly earnings update (not accurate)]
-* Get-TotalUpdate           [Get total earnings (not accurate)]
+Get-Updates               [Get current status]
+Get-HourlyUpdate          [Hourly earnings update (not accurate)]
+Get-TotalUpdate           [Get total earnings (not accurate)]
 
 -=[ Wallet API ]=-
-* Get-PublicAddress         [Get your wallet address]
-* Get-PublicKey             [Get your wallet public key]
-* Get-WalletTransactions    [Get detailed info on your wallet transactions]
-* Refresh-Balance           [Refresh your wallet balance. May be useful if your BTT is stuck in transfer 'limbo']
+Get-PublicAddress         [Get your wallet address]
+Get-PublicKey             [Get your wallet public key]
+Get-WalletTransactions    [Get detailed info on your wallet transactions]
+Refresh-Balance           [Refresh your wallet balance. May be useful if your BTT is stuck in transfer 'limbo']
 
 -=[ BTT Token Exchange API ]=-
-* Check-BTTExchange         [Check if BTT Exchange has enough tokens for withdraw]
+Check-BTTExchange         [Check if BTT Exchange has enough tokens for withdraw]
 
 -=[ Misc ]=-
-* Get-Env                   [Get your current environment]
+Get-Env                   [Get your current environment]
 ```
 
 ## Usage example
