@@ -29,7 +29,7 @@ Download the latest .ps1 file in [Releases](https://github.com/ArchiRocksTech/BT
 
 ## Usage example
 
-Copy the downloaded .ps1 file to a folder, and SHIFT + Right-Click in the folder to open a PowerShell console window.
+Move the downloaded .ps1 file to a desired folder, and SHIFT + Right-Click in the folder to open a PowerShell console window.
 
 PowerShell Console
 
@@ -37,7 +37,7 @@ PowerShell Console
 .\BTTboostAPI-PowerShell-v0-1.ps1 Get-WalletTransactions
 ```
 
-output:
+Output:
 ```
 [{'amount': 1195000000,
   'created': 1622713771,
