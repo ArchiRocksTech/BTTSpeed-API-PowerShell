@@ -1,6 +1,5 @@
 # BTT Speed API
-> Unofficial PowerShell API Wrapper for the BTT (BitTorrent Token) Speed WebUI for uTorrent and BitTorrent Clients
-
+Unofficial PowerShell API Wrapper for the BTT (BitTorrent Token) Speed WebUI for uTorrent and BitTorrent Clients.
 Ported from the [Python source](https://github.com/BTTBoost/BTTSpeed-API). As this is a port, I will update it as the Python source is updated.
 
 ## Available API Endpoints
