@@ -30,6 +30,7 @@ Download the latest .ps1 file in [Releases](https://github.com/ArchiRocksTech/BT
 ## Usage example
 
 **Windows**
+
 Move the downloaded .ps1 file to a desired folder, and SHIFT + Right-Click in the folder, and click Open a PowerShell window.
 Note: If you have the Open Command window option, open that, then type PowerShell and press Enter to start the PowerShell console.
 
