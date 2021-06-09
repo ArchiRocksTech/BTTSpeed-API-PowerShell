@@ -35,7 +35,7 @@ Note: If you have the Open Command window option, open that, then type PowerShel
 PowerShell Console
 
 ```
-.\BTTboostAPI-PowerShell-v0-1.ps1 Get-WalletTransactions
+.\BTTboostAPI-PowerShell.ps1 Get-WalletTransactions
 ```
 
 Output:
