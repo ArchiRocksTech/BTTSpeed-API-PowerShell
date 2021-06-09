@@ -23,7 +23,13 @@ Check-BTTExchange         [Check if BTT Exchange has enough tokens for withdraw]
 Get-Env                   [Get your current environment]
 ```
 
+## Download
+
+Download the latest .ps1 file in [Releases](https://github.com/ArchiRocksTech/BTTSpeed-API-PowerShell/releases).
+
 ## Usage example
+
+Copy the downloaded .ps1 file to a folder, and SHIFT + Right-Click in the folder to open a PowerShell console window.
 
 PowerShell Console
 
