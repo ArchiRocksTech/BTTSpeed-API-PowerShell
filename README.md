@@ -5,6 +5,7 @@ Ported from the [Python source](https://github.com/BTTBoost/BTTSpeed-API). As th
 
 ## Available API Endpoints
 
+```
 -=[ Earnings API ]=-
 * Get-Updates               [Get current status]
 * Get-HourlyUpdate          [Hourly earnings update (not accurate)]
@@ -21,6 +22,7 @@ Ported from the [Python source](https://github.com/BTTBoost/BTTSpeed-API). As th
 
 -=[ Misc ]=-
 * Get-Env                   [Get your current environment]
+```
 
 ## Usage example
 
