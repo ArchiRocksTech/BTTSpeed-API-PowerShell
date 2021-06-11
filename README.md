@@ -58,6 +58,8 @@ Output:
   'type': 'Withdrawal'}]
 ```
 
+See [Examples](https://github.com/ArchiRocksTech/BTTSpeed-API-PowerShell/tree/main/examples) for more use case demonstrations.
+
 ## Excluded API Endpoints
 There are some endpoints purposefully left out for numerous reasons: 
 1) The API endpoint is not publicly live (like the Binance Exchange Wallet Integration endpoints)
