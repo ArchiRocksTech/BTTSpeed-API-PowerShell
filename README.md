@@ -14,7 +14,7 @@ Get-TotalUpdate           [Get total earnings (not accurate)]
 Get-PublicAddress         [Get your wallet address]
 Get-PublicKey             [Get your wallet public key]
 Get-WalletTransactions    [Get detailed info on your wallet transactions]
-Refresh-Balance           [Refresh your wallet balance. May be useful if your BTT is stuck in transfer 'limbo']
+Refresh-Balance           [Refresh your wallet balance. May be useful for BTT stuck in transfer 'limbo']
 
 -=[ BTT Token Exchange API ]=-
 Check-BTTExchange         [Check if BTT Exchange has enough tokens for withdraw]
