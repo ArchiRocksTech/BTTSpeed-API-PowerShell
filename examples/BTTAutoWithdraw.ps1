@@ -1,0 +1,98 @@
+# Auto-Withdraw and Balance Logger Script
+# Source https://github.com/ArchiRocksTech/BTTSpeed-API-PowerShell
+# Ported / Adapted from https://github.com/badenbaden/BTTdevAMOUNT/blob/main/withdraw.js
+# Ported and Expanded by Archimedez
+# @ frt.rocks
+# License: WTFPL
+# =======================================================
+
+# CONFIGURATION
+
+# BTT API PowerShell file path (Default: "$env:USERPROFILE\Desktop\Downloads\BTTspeedAPI-PowerShell.ps1")
+$BTTapi = "$env:USERPROFILE\Desktop\Downloads\BTTspeedAPI-PowerShell.ps1"
+
+# Withdraw Log file (Default: "$env:USERPROFILE\Desktop\Documents\BTTautoWithdraw.log")
+$withdrawLog = "$env:USERPROFILE\Desktop\Documents\BTTautoWithdraw.log"
+
+# Balance Log file (Default: "$env:USERPROFILE\Desktop\Documents\BTTbalance.log")
+$balanceLog = "$env:USERPROFILE\Desktop\Documents\BTTbalance.log"
+
+# Actually withdraw or just log / monitor? ($true or $false. Default: $false)
+$doWithdraw = $false
+
+# Check In-App BTT Balance every X seconds. (Number. Default: 30)
+$min = 30
+
+# Withdraw if in-app balance is above X in BTT. 1000 is minimum allowed by exchange. (Number. Default 1000)
+$withdrawAbove = 1000
+
+# Amount to withdraw (0 is all) in BTT. (Number. Default 0)
+$withdrawAmount = 0
+
+# Attempt withdraw of remaining exchange balance if full withdraw not possible? ($true or $false. Default $true)
+$withdrawMinimum = $true
+
+#======== CHANGE NOTHING BELOW ===============================
+$host.UI.RawUI.WindowTitle = "BTTSpeed-Auto-Withdraw-And-Balance-Logger"
+# Die if we don't have the BTTSpeedAPI-PowerShell
+If (!(Test-Path -Path $BTTapi -ErrorAction SilentlyContinue)) {
+    Write-Host "Unable to locate BTTspeedAPI-PowerShell.ps1. Verify `$BTTapi Path" -ForegroundColor Red
+    pause; Break
+}
+# Die if we don't have the µTorrent Helper process running
+If (!(Get-Process helper | Where-Object {$_.Description -like "µTorrent Helper"})){
+    Write-Host "BTTSpeed Helper Process is not running. Make sure you click 'Speed' inside your torrent client." -ForegroundColor Red
+    pause; Break
+}
+
+$stopIt = $false
+$lastBalance = 0
+
+Do {    
+    $sleepTime = ($min * 1000) + (Get-Random -Minimum 1 -Maximum 500)
+    & $BTTapi Refresh-Balance | Out-Null
+    $myInfo = & $BTTapi Get-Updates
+    [decimal]$myBalance = $myInfo.balance / 1000000
+    $bttPeers = $myInfo.peers
+    If ($lastBalance -ne $myBalance) {
+        Add-Content -Path $balanceLog -Value "$(Get-Date), $myBalance"
+        $lastBalance = $myBalance
+    }
+    $exBalance = & $BTTapi Check-BTTExchange
+    Write-Host "[$(Get-Date)][BTT Peers: $bttPeers] [BTT Balance: $myBalance] [Exchange Balance: $exBalance]" -ForegroundColor Cyan
+    If ($myBalance -ge $withdrawAbove -and $doWithdraw -eq $true){
+        # My balance is X or more, so I want to exchange        
+        $amount = If ($withdrawAmount -eq 0){$myBalance}Else{$withdrawAmount}
+        If ($exBalance -ge $amount) {
+            # Exchange balance is X or more, so exchange might work
+            Write-Host "Exchange has sufficent funds [$exBalance], attempting withdraw" -ForegroundColor Green
+            Add-Content -Path $withdrawLog -Value "$(Get-Date) Exchange Balance [$exBalance]"            
+            $txResponse = & $BTTapi Withdraw-BTT -withdraw $amount
+            If ($txResponse -like "ERROR:*") {
+                Write-Host "[$txResponse]" -ForegroundColor Red
+            } Else {               
+                Write-Host "[Status]  $($txResponse.status)`r`n[Message] $($txResponse.message)" -ForegroundColor Yellow            
+                Add-Content -Path $withdrawLog -Value "$(Get-Date)`r`n$txResponse"
+            }
+        } ElseIf ($exBalance -ge 1000 -and $withdrawMinimum -eq $true) {
+            # Exchange balance is X or more, so exchange might work
+            Write-Host "Exchange has sufficent minimum funds [$exBalance], attempting withdraw" -ForegroundColor Green
+            Add-Content -Path $withdrawLog -Value "$(Get-Date) Exchange Balance [$exBalance]"
+            $txResponse = & $BTTapi Withdraw-BTT -withdraw $exBalance
+            If ($txResponse -like "ERROR:*") {
+                Write-Host "[$txResponse]" -ForegroundColor Red
+            } Else {                
+                Write-Host "[Status]  $($txResponse.status)`r`n[Message] $($txResponse.message)" -ForegroundColor Yellow            
+                Add-Content -Path $withdrawLog -Value "$(Get-Date)`r`n$txResponse"
+            }
+        } Else {
+            Write-Host "Exchange has insufficent funds [$exBalance]" -ForegroundColor Red
+        }
+
+    }
+
+    Write-Host "Sleeping for $($sleepTime / 1000) seconds" -ForegroundColor Cyan
+    $host.UI.RawUI.WindowTitle = "BTTSpeed-Auto-Withdraw-And-Balance-Logger"
+    Start-Sleep -Milliseconds $sleepTime
+
+} Until ($stopIt -eq $true)
