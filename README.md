@@ -26,7 +26,9 @@ Get-Env                   [Get your current environment]
 
 # Download
 
-Download the latest .ps1 [files](https://github.com/ArchiRocksTech/BTTSpeed-API-PowerShell).
+Download the latest .ps1 files.
+* [BTTspeedAPI-PowerShell.ps1](https://raw.githubusercontent.com/ArchiRocksTech/BTTSpeed-API-PowerShell/main/BTTspeedAPI-PowerShell.ps1)
+* [BTTAutoWithdraw.ps1](https://raw.githubusercontent.com/ArchiRocksTech/BTTSpeed-API-PowerShell/main/examples/BTTAutoWithdraw.ps1) (requires BTTspeedAPI-PowerShell.ps1)
 
 # Usage example
 
@@ -91,7 +93,7 @@ Complete list of endpoints actually published by BitTorrent team can be seen in 
 
 # Troubleshooting
 
-**ERROR**: [ScriptName] cannot be loaded because running scripts is disabled on this system.
+**ERROR**: [`ScriptName`] cannot be loaded because running scripts is disabled on this system.
 
 **SOLUTION**: Enable running PowerShell scripts by adjusting the Execution Policy on your system.
 
