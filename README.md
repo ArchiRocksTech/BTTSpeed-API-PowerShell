@@ -43,7 +43,7 @@ PowerShell Console
 .\BTTspeedAPI-PowerShell.ps1 Get-WalletTransactions
 ```
 
-Output:
+Output (object):
 ```
 id      : 1699243394212
 amount  : 10005000000
