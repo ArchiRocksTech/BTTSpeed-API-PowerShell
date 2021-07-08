@@ -40,8 +40,9 @@ If (!(Test-Path -Path $BTTapi -ErrorAction SilentlyContinue)) {
     pause; Break
 }
 # Warn if we don't have the µTorrent Helper process running
-If (!(Get-Process helper | Where-Object {$_.Description -like "µTorrent Helper"})){
+If (!(Get-Process helper | Where-Object {$_.Description -like "*Torrent Helper"})){
     Write-Host "BTTSpeed Helper Process was not detected. Make sure you click 'Speed' inside your torrent client before running this script." -ForegroundColor Yellow    
+    pause; Break
 }
 
 $stopIt = $false
