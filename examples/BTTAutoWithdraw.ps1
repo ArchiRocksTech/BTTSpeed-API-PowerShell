@@ -32,6 +32,9 @@ $withdrawAmount = 0
 # Attempt withdraw of remaining exchange balance if full withdraw not possible? ($true or $false. Default $true)
 $withdrawMinimum = $true
 
+# Disable spending BTT for Speed? ($true or $false. Default $true)
+$disableSpending = $true
+
 #======== CHANGE NOTHING BELOW ===============================
 $host.UI.RawUI.WindowTitle = "BTTSpeed-Auto-Withdraw-And-Balance-Logger"
 # Die if we don't have the BTTSpeedAPI-PowerShell
@@ -39,7 +42,7 @@ If (!(Test-Path -Path $BTTapi -ErrorAction SilentlyContinue)) {
     Write-Host "Unable to locate BTTspeedAPI-PowerShell.ps1. Verify `$BTTapi Path" -ForegroundColor Red
     pause; Break
 }
-# Warn if we don't have the µTorrent Helper process running
+# Warn if we don't have the uTorrent Helper process running
 If (!(Get-Process helper | Where-Object {$_.Description -like "*Torrent Helper"})){
     Write-Host "BTTSpeed Helper Process was not detected. Make sure you click 'Speed' inside your torrent client before running this script." -ForegroundColor Yellow    
     pause; Break
@@ -89,6 +92,25 @@ Do {
             Write-Host "Exchange has insufficent funds [$exBalance]" -ForegroundColor Red
         }
 
+    }
+
+    # Report on Speed Spending, disable Speed spending if configured to do so in settings
+    $spendingStatus = & $BTTapi Get-SpendStatus
+    If ($spendingStatus -like "ERROR:*") {
+        Write-Host "[$spendingStatus]" -ForegroundColor Red
+    } Else {               
+        If ($spendingStatus -eq $true) {
+            Write-Host "BTT Spending is Enabled" -ForegroundColor Yellow
+            If ($disableSpending -eq $true) {
+                & $BTTapi Disable-Spend | Out-Null
+                Start-Sleep -Seconds 1
+                If ( (& $BTTapi Get-SpendStatus) -eq $false) {
+                    Write-Host "BTT Spending is now Disabled" -ForegroundColor Green
+                }
+            }
+        } ElseIf ($spendingStatus -eq $false) {
+            Write-Host "BTT Spending is Disabled" -ForegroundColor Cyan
+        }
     }
 
     Write-Host "Sleeping for $($sleepTime / 1000) seconds" -ForegroundColor Cyan

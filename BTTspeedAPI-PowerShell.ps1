@@ -7,7 +7,7 @@
 # =======================================================
 
 param (
-    [ValidateSet('Get-Updates','Get-HourlyUpdate','Get-TotalUpdate','Get-PublicAddress','Get-PublicKey','Get-WalletTransactions','Refresh-Balance','Check-BTTExchange','Withdraw-BTT','Get-Env')]
+    [ValidateSet('Get-SpendStatus','Disable-Spend','Enable-Spend','Get-Updates','Get-HourlyUpdate','Get-TotalUpdate','Get-PublicAddress','Get-PublicKey','Get-WalletTransactions','Refresh-Balance','Check-BTTExchange','Withdraw-BTT','Get-Env')]
     [string]$command = "Show-Commands",
     [decimal]$withdraw = 0
 )
@@ -35,6 +35,9 @@ Get-PublicAddress         [Get your wallet address]
 Get-PublicKey             [Get your wallet public key]
 Get-WalletTransactions    [Get detailed info on your wallet transactions]
 Refresh-Balance           [Refresh your wallet balance. May be useful if your BTT is stuck in transfer 'limbo']
+Get-SpendStatus           [Get your BTT Spending status for Speed]
+Disable-Spend             [Disable your BTT Spending for Speed]
+Enable-Spend              [Enable your BTT Spending for Speed]
 
 -=[ BTT Token Exchange API ]=-
 Check-BTTExchange         [Check if BTT Exchange has enough tokens for withdraw]
@@ -277,6 +280,37 @@ Function Refresh-Balance($base, $token, $port){
         Return "ERROR: $($webError.message)"
     }    
 }
+
+Function Get-SpendStatus($base, $token, $port){
+    $url = "$base`:$port/api/store/spend?t=$token"
+    Try {
+        $data = Invoke-RestMethod -Uri $url -Headers $headers -Method Get -ErrorVariable webError -UseBasicParsing
+        Return $data # True, spending enabled. False, spending not enabled.
+    } Catch {
+        Return "ERROR: $($webError.message)"
+    }
+}
+
+Function Disable-Spend($base, $token, $port){
+    $url = "$base`:$port/api/store/spend?t=$token"
+    Try {
+        $data = Invoke-RestMethod -Uri $url -Headers $headers -Method Post -ErrorVariable webError -UseBasicParsing -Body 'false'
+        Return $data
+    } Catch {
+        Return "ERROR: $($webError.message)"
+    }
+}
+
+Function Enable-Spend($base, $token, $port){
+    $url = "$base`:$port/api/store/spend?t=$token"
+    Try {
+        $data = Invoke-RestMethod -Uri $url -Headers $headers -Method Post -ErrorVariable webError -UseBasicParsing
+        Return $data
+    } Catch {
+        Return "ERROR: $($webError.message)"
+    }
+}
+
 #endregion WalletAPI
 
 # BTT TOKEN EXCHANGE API
