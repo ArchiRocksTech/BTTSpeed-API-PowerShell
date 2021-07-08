@@ -15,6 +15,9 @@ Get-PublicAddress         [Get your wallet address]
 Get-PublicKey             [Get your wallet public key]
 Get-WalletTransactions    [Get detailed info on your wallet transactions]
 Refresh-Balance           [Refresh your wallet balance. May be useful for BTT stuck in transfer 'limbo']
+Get-SpendStatus           [Get your BTT Spending status for Speed]
+Disable-Spend             [Disable your BTT Spending for Speed]
+Enable-Spend              [Enable your BTT Spending for Speed]
 
 -=[ BTT Token Exchange API ]=-
 Check-BTTExchange         [Check if BTT Exchange has enough tokens for withdraw]
