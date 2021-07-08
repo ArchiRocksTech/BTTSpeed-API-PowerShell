@@ -6,7 +6,7 @@ Ported from the [Python source](https://github.com/BTTBoost/BTTSpeed-API), and f
 
 Download the latest .ps1 files.
 * [BTTspeedAPI-PowerShell.ps1](https://raw.githubusercontent.com/ArchiRocksTech/BTTSpeed-API-PowerShell/main/BTTspeedAPI-PowerShell.ps1)
-* [BTTAutoWithdraw.ps1](https://raw.githubusercontent.com/ArchiRocksTech/BTTSpeed-API-PowerShell/main/examples/BTTAutoWithdraw.ps1) (requires BTTspeedAPI-PowerShell.ps1)
+* [BTTAutoWithdraw.ps1](https://raw.githubusercontent.com/ArchiRocksTech/BTTSpeed-API-PowerShell/main/examples/BTTAutoWithdraw.ps1) (Edit to configure settings. Requires BTTspeedAPI-PowerShell.ps1)
 
 # Usage example
 
