@@ -8,14 +8,14 @@
 
 # CONFIGURATION
 
-# BTT API PowerShell file path (Default: "$env:USERPROFILE\Desktop\Downloads\BTTspeedAPI-PowerShell.ps1")
-$BTTapi = "$env:USERPROFILE\Desktop\Downloads\BTTspeedAPI-PowerShell.ps1"
+# BTT API PowerShell file path (Default: "$env:USERPROFILE\Downloads\BTTspeedAPI-PowerShell.ps1")
+$BTTapi = "$env:USERPROFILE\Downloads\BTTspeedAPI-PowerShell.ps1"
 
-# Withdraw Log file (Default: "$env:USERPROFILE\Desktop\Documents\BTTautoWithdraw.log")
-$withdrawLog = "$env:USERPROFILE\Desktop\Documents\BTTautoWithdraw.log"
+# Withdraw Log file (Default: "$env:USERPROFILE\Documents\BTTautoWithdraw.log")
+$withdrawLog = "$env:USERPROFILE\Documents\BTTautoWithdraw.log"
 
-# Balance Log file (Default: "$env:USERPROFILE\Desktop\Documents\BTTbalance.log")
-$balanceLog = "$env:USERPROFILE\Desktop\Documents\BTTbalance.log"
+# Balance Log file (Default: "$env:USERPROFILE\Documents\BTTbalance.log")
+$balanceLog = "$env:USERPROFILE\Documents\BTTbalance.log"
 
 # Actually withdraw or just log / monitor? ($true or $false. Default: $false)
 $doWithdraw = $false
@@ -39,10 +39,9 @@ If (!(Test-Path -Path $BTTapi -ErrorAction SilentlyContinue)) {
     Write-Host "Unable to locate BTTspeedAPI-PowerShell.ps1. Verify `$BTTapi Path" -ForegroundColor Red
     pause; Break
 }
-# Die if we don't have the µTorrent Helper process running
+# Warn if we don't have the µTorrent Helper process running
 If (!(Get-Process helper | Where-Object {$_.Description -like "µTorrent Helper"})){
-    Write-Host "BTTSpeed Helper Process is not running. Make sure you click 'Speed' inside your torrent client." -ForegroundColor Red
-    pause; Break
+    Write-Host "BTTSpeed Helper Process was not detected. Make sure you click 'Speed' inside your torrent client before running this script." -ForegroundColor Yellow    
 }
 
 $stopIt = $false
@@ -59,7 +58,7 @@ Do {
         $lastBalance = $myBalance
     }
     $exBalance = & $BTTapi Check-BTTExchange
-    Write-Host "[$(Get-Date)][BTT Peers: $bttPeers] [BTT Balance: $myBalance] [Exchange Balance: $exBalance]" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date)][BTT Peers: $bttPeers] [BTT Balance: $([math]::Round($myBalance,4))] [Exchange Balance: $([math]::Round($exBalance,2))]" -ForegroundColor Cyan
     If ($myBalance -ge $withdrawAbove -and $doWithdraw -eq $true){
         # My balance is X or more, so I want to exchange        
         $amount = If ($withdrawAmount -eq 0){$myBalance}Else{$withdrawAmount}
