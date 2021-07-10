@@ -36,6 +36,7 @@ $withdrawMinimum = $true
 $disableSpending = $true
 
 #======== CHANGE NOTHING BELOW ===============================
+#Requires -Version 5.1
 $host.UI.RawUI.WindowTitle = "BTTSpeed-Auto-Withdraw-And-Balance-Logger"
 # Die if we don't have the BTTSpeedAPI-PowerShell
 If (!(Test-Path -Path $BTTapi -ErrorAction SilentlyContinue)) {

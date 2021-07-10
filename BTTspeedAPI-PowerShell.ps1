@@ -5,7 +5,7 @@
 # Original Python Source: https://github.com/BTTBoost/BTTSpeed-API
 # License: WTFPL
 # =======================================================
-
+#Requires -Version 5.1
 param (
     [ValidateSet('Get-SpendStatus','Disable-Spend','Enable-Spend','Get-Updates','Get-HourlyUpdate','Get-TotalUpdate','Get-PublicAddress','Get-PublicKey','Get-WalletTransactions','Refresh-Balance','Check-BTTExchange','Withdraw-BTT','Get-Env')]
     [string]$command = "Show-Commands",
