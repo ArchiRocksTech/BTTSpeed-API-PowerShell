@@ -1,37 +1,12 @@
 # BTT Speed API
 Unofficial PowerShell API Wrapper for the BTT (BitTorrent Token) Speed WebUI for uTorrent and BitTorrent Clients.
-Ported from the [Python source](https://github.com/BTTBoost/BTTSpeed-API).
-
-# Available API Endpoints
-
-```
--=[ Earnings API ]=-
-Get-Updates               [Get updated status]
-Get-HourlyUpdate          [Hourly earnings update (not accurate)]
-Get-TotalUpdate           [Get total earnings (not accurate)]
-
--=[ Wallet API ]=-
-Get-PublicAddress         [Get your wallet address]
-Get-PublicKey             [Get your wallet public key]
-Get-WalletTransactions    [Get detailed info on your wallet transactions]
-Refresh-Balance           [Refresh your wallet balance. May be useful for BTT stuck in transfer 'limbo']
-Get-SpendStatus           [Get your BTT Spending status for Speed]
-Disable-Spend             [Disable your BTT Spending for Speed]
-Enable-Spend              [Enable your BTT Spending for Speed]
-
--=[ BTT Token Exchange API ]=-
-Check-BTTExchange         [Check if BTT Exchange has enough tokens for withdraw]
-Withdraw-BTT              [Attempt to auto-withdraw from in-app BTT to on-chain BTT via the BTT Exchange]
-
--=[ Misc ]=-
-Get-Env                   [Get your current environment]
-```
+Ported from the [Python source](https://github.com/BTTBoost/BTTSpeed-API), and futher extended.
 
 # Download
 
 Download the latest .ps1 files.
 * [BTTspeedAPI-PowerShell.ps1](https://raw.githubusercontent.com/ArchiRocksTech/BTTSpeed-API-PowerShell/main/BTTspeedAPI-PowerShell.ps1)
-* [BTTAutoWithdraw.ps1](https://raw.githubusercontent.com/ArchiRocksTech/BTTSpeed-API-PowerShell/main/examples/BTTAutoWithdraw.ps1) (requires BTTspeedAPI-PowerShell.ps1)
+* [BTTAutoWithdraw.ps1](https://raw.githubusercontent.com/ArchiRocksTech/BTTSpeed-API-PowerShell/main/examples/BTTAutoWithdraw.ps1) (Edit to configure settings. Requires BTTspeedAPI-PowerShell.ps1)
 
 # Usage example
 
@@ -57,6 +32,31 @@ message : SUCCESS
 ```
 
 See [Examples](https://github.com/ArchiRocksTech/BTTSpeed-API-PowerShell/tree/main/examples) for more use case demonstrations.
+
+# Available API Endpoints
+
+```
+-=[ Earnings API ]=-
+Get-Updates               [Get updated status]
+Get-HourlyUpdate          [Hourly earnings update (not accurate)]
+Get-TotalUpdate           [Get total earnings (not accurate)]
+
+-=[ Wallet API ]=-
+Get-PublicAddress         [Get your wallet address]
+Get-PublicKey             [Get your wallet public key]
+Get-WalletTransactions    [Get detailed info on your wallet transactions]
+Refresh-Balance           [Refresh your wallet balance. May be useful for BTT stuck in transfer 'limbo']
+Get-SpendStatus           [Get your BTT Spending status for Speed]
+Disable-Spend             [Disable your BTT Spending for Speed]
+Enable-Spend              [Enable your BTT Spending for Speed]
+
+-=[ BTT Token Exchange API ]=-
+Check-BTTExchange         [Check if BTT Exchange has enough tokens for withdraw]
+Withdraw-BTT              [Attempt to auto-withdraw from in-app BTT to on-chain BTT via the BTT Exchange]
+
+-=[ Misc ]=-
+Get-Env                   [Get your current environment]
+```
 
 # Excluded API Endpoints
 There are some endpoints purposefully left out for numerous reasons: 
