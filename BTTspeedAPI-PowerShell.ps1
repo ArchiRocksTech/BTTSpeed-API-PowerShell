@@ -58,7 +58,10 @@ based on the returned data. See the example scripts for more information.
 
 #region BTTAPIdefaults
 $base = 'http://127.0.0.1'
+# Old Dev Wallet
 #$exchangeWalletBTT = 'TA1EHWb1PymZ1qpBNfNj9uTaxd18ubrC7a' 
+# New Dev Wallet
+$exchangeWalletBTT = 'TTZu7wpHa9tnQjFUDrsjgPfXE7fck7yYs5' 
 
 Function Get-Port {
     $portFile = "$env:LOCALAPPDATA\BitTorrentHelper\port"
@@ -317,13 +320,15 @@ Function Enable-Spend($base, $token, $port){
 #region BTTtokenExchangeAPI
 Function Check-BTTExchange {
     Try {
-        $exchangeWallet = (Invoke-WebRequest -Uri "https://api.trongrid.io/v1/accounts/410061E74968E356A61E859EB96329812FE58F5BDC" -Method Get -ContentType 'charset=utf-8' -ErrorVariable webError -UseBasicParsing).content
-        $wallet = $exchangeWallet | ConvertFrom-Json
-        $bttBalance = $wallet.data[0].assetV2[1].value
+        #$exchangeWallet = (Invoke-WebRequest -Uri "https://api.trongrid.io/v1/accounts/410061E74968E356A61E859EB96329812FE58F5BDC" -Method Get -ContentType 'charset=utf-8' -ErrorVariable webError -UseBasicParsing).content
+        #$wallet = $exchangeWallet | ConvertFrom-Json
+        #$bttBalance = $wallet.data[0].assetV2[1].value
+        
         # Fallback method included
-        #$exchangeWallet = "https://apilist.tronscan.org/api/account?address=$exchangeWalletBTT"
-        #$data = Invoke-RestMethod -Uri $exchangeWallet | ConvertTo-Json | ConvertFrom-Json
-        #$bttBalance = ($data.tokenBalances | Where-Object {$_.tokenAbbr -eq 'BTT'}).balance
+        $exchangeWallet = "https://apilist.tronscan.org/api/account?address=$exchangeWalletBTT"
+        $data = Invoke-RestMethod -Uri $exchangeWallet | ConvertTo-Json | ConvertFrom-Json
+        $bttBalance = ($data.tokenBalances | Where-Object {$_.tokenAbbr -eq 'BTT'}).balance
+
         If ($bttBalance) {
             $walletBalance = $bttBalance / 1000000
             Return $walletBalance # Returns normalized balance
